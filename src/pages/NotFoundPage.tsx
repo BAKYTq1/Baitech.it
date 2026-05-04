@@ -11,6 +11,7 @@ export default function NotFoundPage() {
         description="Страница не найдена. Вернитесь на главную страницу BAITECH.IT для новых проектов и услуг."
         keywords="404, страница не найдена, BAITECH.IT"
         url="https://baitech.it/404"
+        noindex
       />
       <section className="flex min-h-[calc(100vh-96px)] items-center justify-center px-6 py-24 sm:px-10 lg:px-14">
         <div className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-12 text-center shadow-soft">
