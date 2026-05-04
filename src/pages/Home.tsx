@@ -2,7 +2,6 @@ import CtaBanner from '../components/sections/CtaBanner';
 import Hero from '../components/sections/Hero';
 import Process from '../components/sections/Process';
 import Services from '../components/sections/Services';
-import TechStack from '../components/sections/TechStack';
 import WhyUs from '../components/sections/WhyUs';
 import SEO from '../components/seo/SEO';
 import { companyInfo } from '../data/company';
@@ -39,7 +38,6 @@ export default function Home() {
       />
       <Hero />
       <Services />
-      <TechStack />
       <WhyUs />
       <Process />
       <CtaBanner />

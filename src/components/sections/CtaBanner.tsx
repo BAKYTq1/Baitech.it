@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { MessageCircle } from 'lucide-react';
 import { companyInfo } from '../../data/company';
 import Button from '../ui/Button';
 
@@ -17,7 +18,10 @@ export default function CtaBanner() {
           <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">Запустим ваш проект вместе</h2>
         </div>
         <a href={companyInfo.whatsAppHref} target="_blank" rel="noreferrer">
-          <Button type="button">Связаться с нами</Button>
+          <Button type="button">
+            Написать в WhatsApp
+            <MessageCircle className="h-4 w-4" />
+          </Button>
         </a>
       </motion.div>
     </section>

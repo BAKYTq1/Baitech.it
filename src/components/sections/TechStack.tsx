@@ -1,6 +1,14 @@
 import { motion } from 'framer-motion';
+import { CheckCircle2, CloudCog, MonitorSmartphone, Server, Smartphone } from 'lucide-react';
 import { stackGroups } from '../../data/stack';
 import SectionHeader from '../ui/SectionHeader';
+
+const icons = {
+  Frontend: MonitorSmartphone,
+  Backend: Server,
+  Mobile: Smartphone,
+  DevOps: CloudCog,
+};
 
 export default function TechStack() {
   return (
@@ -17,11 +25,22 @@ export default function TechStack() {
               transition={{ duration: 0.45 }}
               className="section-card rounded-[2rem] border border-white/10 p-8"
             >
-              <h3 className="mb-6 text-xl font-semibold text-white">{group.title}</h3>
+              <div className="mb-5 flex items-start gap-3">
+                {(() => {
+                  const Icon = icons[group.technicalTitle as keyof typeof icons] ?? CheckCircle2;
+                  return <Icon className="mt-1 h-6 w-6 shrink-0 text-primary" aria-hidden="true" />;
+                })()}
+                <div>
+                  <h3 className="text-xl font-semibold text-white">{group.title}</h3>
+                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-primary">{group.technicalTitle}</p>
+                </div>
+              </div>
+              <p className="mb-6 text-sm leading-6 text-slate-400">{group.description}</p>
+              <p className="mb-3 text-xs uppercase tracking-[0.18em] text-slate-500">Используем</p>
               <ul className="space-y-3 text-slate-300">
                 {group.items.map((item) => (
                   <li key={item} className="flex items-center gap-3">
-                    <span className="h-2 w-2 rounded-full bg-primary" />
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
                     <span>{item}</span>
                   </li>
                 ))}

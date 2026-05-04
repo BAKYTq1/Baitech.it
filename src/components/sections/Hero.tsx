@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Briefcase, LineChart } from 'lucide-react';
+import { ArrowRight, Briefcase, LineChart, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { companyInfo } from '../../data/company';
 import Button from '../ui/Button';
@@ -48,7 +48,10 @@ export default function Hero() {
             className="mt-10 flex flex-col gap-4 sm:flex-row"
           >
             <a href={companyInfo.whatsAppHref} target="_blank" rel="noreferrer">
-              <Button type="button" className="w-full sm:w-auto">Связаться с нами</Button>
+              <Button type="button" className="w-full sm:w-auto">
+                Написать в WhatsApp
+                <MessageCircle className="h-4 w-4" />
+              </Button>
             </a>
             <Link to="/projects">
               <Button variant="outline" className="w-full sm:w-auto">

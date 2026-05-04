@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { companyInfo } from '../../data/company';
 import Button from '../ui/Button';
 
 const navLinks = [
   { label: 'Услуги', href: '/services' },
   { label: 'Проекты', href: '/projects' },
+  { label: 'Технологии', href: '/technologies' },
   { label: 'О нас', href: '/about' },
   { label: 'Контакты', href: '/contact' },
 ];
@@ -36,9 +36,9 @@ export default function Navbar() {
           ))}
         </nav>
         <div className="hidden items-center gap-4 md:flex">
-          <a href={companyInfo.whatsAppHref} target="_blank" rel="noreferrer">
-            <Button type="button">Связаться с нами</Button>
-          </a>
+          <Link to="/contact">
+            <Button type="button">Наши контакты</Button>
+          </Link>
         </div>
         <button
           type="button"
@@ -70,9 +70,9 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <a href={companyInfo.whatsAppHref} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>
-                <Button type="button" className="w-full">Связаться с нами</Button>
-              </a>
+              <Link to="/contact" onClick={() => setOpen(false)}>
+                <Button type="button" className="w-full">Наши контакты</Button>
+              </Link>
             </div>
           </motion.div>
         ) : null}

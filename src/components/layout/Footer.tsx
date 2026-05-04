@@ -52,6 +52,11 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link to="/technologies" className="hover:text-white">
+                Технологии
+              </Link>
+            </li>
+            <li>
               <Link to="/contact" className="hover:text-white">
                 Контакты
               </Link>
@@ -64,6 +69,8 @@ export default function Footer() {
           <div className="space-y-3 text-slate-400">
             <p>{companyInfo.email}</p>
             <p>{companyInfo.telegram}</p>
+            <p>{companyInfo.instagram}</p>
+            <p>{companyInfo.whatsApp}</p>
             <p>{companyInfo.address}</p>
           </div>
         </div>
