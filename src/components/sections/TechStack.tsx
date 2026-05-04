@@ -19,10 +19,11 @@ export default function TechStack() {
           {stackGroups.map((group) => (
             <motion.div
               key={group.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 26, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45 }}
+              whileHover={{ y: -7, borderColor: 'rgba(91, 107, 248, 0.42)' }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className="section-card rounded-[2rem] border border-white/10 p-8"
             >
               <div className="mb-5 flex items-start gap-3">

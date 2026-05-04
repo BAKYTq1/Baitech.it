@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import PageTransition from './components/ui/PageTransition';
+import ScrollProgress from './components/ui/ScrollProgress';
 import Home from './pages/Home';
 import ServicesPage from './pages/ServicesPage';
 import ProjectsPage from './pages/ProjectsPage';
@@ -15,8 +17,9 @@ function App() {
     <HelmetProvider>
       <div className="min-h-screen bg-[#08080E] text-slate-100">
         <BrowserRouter>
+          <ScrollProgress />
           <Navbar />
-          <main className="relative overflow-hidden">
+          <PageTransition>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/services" element={<ServicesPage />} />
@@ -26,7 +29,7 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
-          </main>
+          </PageTransition>
           <Footer />
         </BrowserRouter>
       </div>

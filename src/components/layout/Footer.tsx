@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { companyInfo } from '../../data/company';
 
@@ -11,16 +12,22 @@ const services = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-[#08080E] px-6 py-16 sm:px-10 lg:px-14">
+    <motion.footer
+      className="border-t border-white/10 bg-[#08080E] px-6 py-16 sm:px-10 lg:px-14"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.55 }}
+    >
       <div className="mx-auto grid max-w-7xl gap-10 xl:grid-cols-[1.8fr_1fr_1fr_1fr]">
         <div className="space-y-4">
           <div className="text-2xl font-semibold text-white">BAITECH<span className="text-accent">.IT</span></div>
           <p className="max-w-md text-slate-400">Цифровые решения для вашего бизнеса — дизайн, разработка и поддержка с акцентом на результат.</p>
           <div className="space-x-3 text-slate-300">
             {companyInfo.socialLinks.map((social) => (
-              <a key={social.label} href={social.href} className="hover:text-white">
+              <motion.a key={social.label} href={social.href} className="inline-block hover:text-white" whileHover={{ y: -3 }}>
                 {social.label}
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>
@@ -30,9 +37,11 @@ export default function Footer() {
           <ul className="space-y-3 text-slate-400">
             {services.map((item) => (
               <li key={item.href}>
-                <Link to={item.href} className="hover:text-white">
+                <motion.div whileHover={{ x: 4 }}>
+                  <Link to={item.href} className="hover:text-white">
                   {item.label}
-                </Link>
+                  </Link>
+                </motion.div>
               </li>
             ))}
           </ul>
@@ -78,6 +87,6 @@ export default function Footer() {
       <div className="mt-14 border-t border-white/10 pt-8 text-center text-sm text-slate-500">
         © 2025 BAITECH.IT — All rights reserved.
       </div>
-    </footer>
+    </motion.footer>
   );
 }

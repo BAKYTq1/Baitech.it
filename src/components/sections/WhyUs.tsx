@@ -36,15 +36,19 @@ export default function WhyUs() {
             return (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 26, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.45 }}
+                whileHover={{ y: -7, borderColor: 'rgba(0, 200, 150, 0.35)' }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 className="section-card rounded-[2rem] border border-white/10 p-8"
               >
-                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-primary/10 text-primary">
+                <motion.div
+                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-primary/10 text-primary"
+                  whileHover={{ rotate: -6, scale: 1.08 }}
+                >
                   <Icon className="h-6 w-6" />
-                </div>
+                </motion.div>
                 <h3 className="mb-3 text-xl font-semibold text-white">{item.title}</h3>
                 <p className="text-slate-400">{item.description}</p>
               </motion.div>

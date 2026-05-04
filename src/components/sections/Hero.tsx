@@ -2,12 +2,13 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Briefcase, LineChart, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { companyInfo } from '../../data/company';
+import AnimatedCounter from '../ui/AnimatedCounter';
 import Button from '../ui/Button';
 
 const stats = [
-  { label: 'Проектов', value: '20+' },
-  { label: 'Года', value: '3+' },
-  { label: 'Клиенты довольны', value: '100%' },
+  { label: 'Проектов', value: 20, suffix: '+' },
+  { label: 'Года', value: 3, suffix: '+' },
+  { label: 'Клиенты довольны', value: 100, suffix: '%' },
 ];
 
 export default function Hero() {
@@ -22,7 +23,11 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/5 px-4 py-2 text-sm text-primary"
           >
-            <span className="inline-flex h-2 w-2 rounded-full bg-accent" />
+            <motion.span
+              className="inline-flex h-2 w-2 rounded-full bg-accent"
+              animate={{ scale: [1, 1.55, 1], opacity: [1, 0.55, 1] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+            />
             🟢 Открыты к новым проектам
           </motion.p>
           <motion.h1
@@ -66,11 +71,21 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.35 }}
             className="mt-12 grid gap-4 sm:grid-cols-3"
           >
-            {stats.map((item) => (
-              <div key={item.label} className="rounded-3xl border border-white/10 bg-slate-950/80 p-5">
-                <p className="text-3xl font-semibold text-white">{item.value}</p>
+            {stats.map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 18, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                whileHover={{ y: -6, scale: 1.03 }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="rounded-3xl border border-white/10 bg-slate-950/80 p-5"
+              >
+                <p className="text-3xl font-semibold text-white">
+                  <AnimatedCounter value={item.value} suffix={item.suffix} />
+                </p>
                 <p className="mt-2 text-sm uppercase tracking-[0.2em] text-slate-400">{item.label}</p>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
@@ -81,30 +96,47 @@ export default function Hero() {
           className="relative mx-auto w-full max-w-xl rounded-[2rem] border border-white/10 bg-slate-950/80 p-8 shadow-soft"
         >
           <div className="space-y-6">
-            <div className="flex items-center gap-4 rounded-3xl border border-accent/15 bg-white/5 p-5">
+            <motion.div
+              className="flex items-center gap-4 rounded-3xl border border-accent/15 bg-white/5 p-5"
+              whileHover={{ x: 6, borderColor: 'rgba(0, 200, 150, 0.45)' }}
+              transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+            >
               <Briefcase className="h-6 w-6 text-accent" />
               <div>
                 <p className="text-sm uppercase tracking-[0.18em] text-slate-400">Клиентам</p>
                 <p className="text-lg font-semibold text-white">Персональный IT-партнёр с полным циклом</p>
               </div>
-            </div>
+            </motion.div>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5">
+              <motion.div
+                className="rounded-3xl border border-white/10 bg-slate-900/80 p-5"
+                whileHover={{ y: -4, borderColor: 'rgba(91, 107, 248, 0.45)' }}
+              >
                 <p className="text-sm text-slate-400">Проекты</p>
-                <p className="mt-2 text-2xl font-semibold text-white">20+</p>
-              </div>
-              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5">
+                <p className="mt-2 text-2xl font-semibold text-white">
+                  <AnimatedCounter value={20} suffix="+" />
+                </p>
+              </motion.div>
+              <motion.div
+                className="rounded-3xl border border-white/10 bg-slate-900/80 p-5"
+                whileHover={{ y: -4, borderColor: 'rgba(91, 107, 248, 0.45)' }}
+              >
                 <p className="text-sm text-slate-400">Сроки</p>
                 <p className="mt-2 text-2xl font-semibold text-white">Стабильно</p>
-              </div>
+              </motion.div>
             </div>
-            <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5">
+            <motion.div
+              className="rounded-3xl border border-white/10 bg-slate-900/80 p-5"
+              whileHover={{ y: -4, borderColor: 'rgba(0, 200, 150, 0.38)' }}
+            >
               <p className="text-sm text-slate-400">Результат</p>
               <div className="mt-3 flex items-center gap-3 text-white">
                 <LineChart className="h-5 w-5 text-accent" />
-                <p>100% клиентов довольны качеством и поддержкой</p>
+                <p>
+                  <AnimatedCounter value={100} suffix="%" /> клиентов довольны качеством и поддержкой
+                </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>

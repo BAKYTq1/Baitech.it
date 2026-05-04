@@ -15,15 +15,19 @@ export default function Services() {
             return (
               <motion.article
                 key={service.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 28, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.5 }}
+                whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(91, 107, 248, 0.45)' }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 className="section-card rounded-[2rem] border border-white/10 p-8"
               >
-                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-primary/10 text-primary">
+                <motion.div
+                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-primary/10 text-primary"
+                  whileHover={{ rotate: 6, scale: 1.08 }}
+                >
                   <Icon className="h-6 w-6" />
-                </div>
+                </motion.div>
                 <p className="mb-2 text-xs uppercase tracking-[0.18em] text-primary">{service.technicalTitle}</p>
                 <h3 className="mb-3 text-2xl font-semibold text-white">{service.title}</h3>
                 <p className="mb-4 text-slate-400">{service.description}</p>

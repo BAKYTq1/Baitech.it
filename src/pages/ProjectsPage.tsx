@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import SEO from '../components/seo/SEO';
 import { projects } from '../data/projects';
 import type { ProjectCategory } from '../types';
@@ -30,11 +30,16 @@ export default function ProjectsPage() {
             <p className="mt-6 text-slate-400 sm:text-lg">Реализованные решения по направлениям Веб, Мобайл, AI и DevOps.</p>
           </div>
           <div className="mb-10 flex flex-wrap gap-3">
-            {tabs.map((tab) => (
-              <button
+            {tabs.map((tab, index) => (
+              <motion.button
                 key={tab}
                 type="button"
                 onClick={() => setActiveTab(tab)}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -3, scale: 1.03 }}
+                whileTap={{ scale: 0.96 }}
+                transition={{ duration: 0.35, delay: index * 0.04 }}
                 className={`rounded-full border px-5 py-2 text-sm transition ${
                   activeTab === tab
                     ? 'border-primary bg-primary/15 text-white '
@@ -42,34 +47,42 @@ export default function ProjectsPage() {
                 }`}
               >
                 {tab}
-              </button>
+              </motion.button>
             ))}
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
-            {filteredProjects.map((project) => (
-              <motion.article
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45 }}
-                className="section-card rounded-[2rem] border border-white/10 p-8"
-              >
-                <div className="mb-4 flex items-center justify-between gap-4">
-                  <span className="rounded-full bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.24em] text-slate-300">{project.category}</span>
-                  <span className="rounded-full bg-slate-900/80 px-3 py-1 text-xs font-medium text-slate-300">{project.status}</span>
-                </div>
-                <h2 className="mb-4 text-2xl font-semibold text-white">{project.title}</h2>
-                <p className="mb-6 text-slate-400">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.stack.map((label) => (
-                    <span key={label} className="rounded-full bg-white/5 px-3 py-1 text-sm text-slate-300">
-                      {label}
-                    </span>
-                  ))}
-                </div>
-              </motion.article>
-            ))}
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => (
+                <motion.article
+                  layout
+                  key={project.title}
+                  initial={{ opacity: 0, y: 28, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 18, scale: 0.96 }}
+                  whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(91, 107, 248, 0.45)' }}
+                  transition={{ duration: 0.42, delay: index * 0.05 }}
+                  className="section-card rounded-[2rem] border border-white/10 p-8"
+                >
+                  <div className="mb-4 flex items-center justify-between gap-4">
+                    <span className="rounded-full bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.24em] text-slate-300">{project.category}</span>
+                    <span className="rounded-full bg-slate-900/80 px-3 py-1 text-xs font-medium text-slate-300">{project.status}</span>
+                  </div>
+                  <h2 className="mb-4 text-2xl font-semibold text-white">{project.title}</h2>
+                  <p className="mb-6 text-slate-400">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.stack.map((label) => (
+                      <motion.span
+                        key={label}
+                        className="rounded-full bg-white/5 px-3 py-1 text-sm text-slate-300"
+                        whileHover={{ y: -2, backgroundColor: 'rgba(91, 107, 248, 0.16)' }}
+                      >
+                        {label}
+                      </motion.span>
+                    ))}
+                  </div>
+                </motion.article>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       </section>
